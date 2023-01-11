@@ -16,8 +16,8 @@ export function Round({ area, heading, matchups }: RoundProps) {
     >
       <SectionHeading>{heading}</SectionHeading>
 
-      {matchups.map((m) => (
-        <Matchup matchup={m} />
+      {matchups.map((m, i) => (
+        <Matchup matchup={m} key={i} />
       ))}
     </Section>
   );
