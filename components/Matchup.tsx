@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { styled } from "../stitches.config";
+import { Team } from "../lib/teams";
 
 const Container = styled("div", {
   width: "100%",
-  height: "7rem",
+  maxWidth: "26rem",
+
+  margin: "0 auto",
 
   display: "flex",
   flexDirection: "column",
@@ -19,6 +22,17 @@ const Container = styled("div", {
   "& + div": {
     marginTop: "$matchup",
   },
+
+  variants: {
+    layout: {
+      portrait: {
+        height: "7rem",
+      },
+      landscape: {
+        height: "6rem",
+      },
+    },
+  },
 });
 
 const TeamBox = styled("div", {
@@ -30,14 +44,13 @@ const TeamBox = styled("div", {
 
   alignItems: "center",
   justifyContent: "flex-start",
-  fontSize: "$body",
   userSelect: "none",
 
   "& + div": {
     borderTop: "1px solid $border100",
   },
 
-  transition: "background-color 0.3s, color 0.3s",
+  transition: "background-color 0.2s, color 0.2s",
 
   variants: {
     selected: {
@@ -61,12 +74,21 @@ const TeamBox = styled("div", {
         color: "$font100",
       },
     },
+    layout: {
+      portrait: {
+        fontSize: "$body",
+      },
+      landscape: {
+        fontSize: "$small",
+      },
+    },
   },
 });
 
 const SeedBox = styled("div", {
   height: "100%",
-  width: "3rem",
+  width: "18%",
+  maxWidth: "3rem",
 
   backgroundColor: "rgba(0, 0, 0, 0.05)",
 
@@ -75,19 +97,19 @@ const SeedBox = styled("div", {
   justifyContent: "center",
 
   fontWeight: "$bold",
+  marginRight: "0.6rem",
 });
 
-const TeamName = styled("span", {
-  flex: "auto",
-  marginLeft: "1rem",
-});
+type TeamLoc = "home" | "away";
 
-type Team = "home" | "away";
+interface MatchupProps {
+  matchup: [Team, Team];
+}
 
-export function Matchup() {
-  const [selected, changeSelected] = useState<null | Team>(null);
+export function Matchup({ matchup }: MatchupProps) {
+  const [selected, changeSelected] = useState<null | TeamLoc>(null);
 
-  const handleClick = (team?: Team) => {
+  const handleClick = (team?: TeamLoc) => {
     if (team === selected) {
       changeSelected(null);
     } else if (team) {
@@ -98,22 +120,24 @@ export function Matchup() {
   };
 
   return (
-    <Container>
+    <Container layout={{ "@initial": "landscape", "@mobile": "portrait" }}>
       <TeamBox
         onClick={() => handleClick("away")}
         selected={selected === "away"}
         lose={selected === "home"}
+        layout={{ "@initial": "landscape", "@mobile": "portrait" }}
       >
-        <SeedBox>1</SeedBox>
-        <TeamName>Miami Dolphins</TeamName>
+        <SeedBox>{matchup[0].seed === 0 ? "-" : matchup[0].seed}</SeedBox>
+        <span>{matchup[0].team}</span>
       </TeamBox>
       <TeamBox
         onClick={() => handleClick("home")}
         selected={selected === "home"}
         lose={selected === "away"}
+        layout={{ "@initial": "landscape", "@mobile": "portrait" }}
       >
-        <SeedBox>1</SeedBox>
-        <TeamName>Buffalo Bills</TeamName>
+        <SeedBox>{matchup[1].seed === 0 ? "-" : matchup[1].seed}</SeedBox>
+        <span>{matchup[1].team}</span>
       </TeamBox>
     </Container>
   );
