@@ -9,7 +9,7 @@ export const { styled, css } = createStitches({
 
       border100: "#e3e3e3",
 
-      highlight: "#92D074",
+      highlight: "#5ec155",
 
       background: "#fafafa",
 
@@ -17,8 +17,10 @@ export const { styled, css } = createStitches({
     },
     space: {
       matchup: "1.5rem",
+      round: "0.75rem",
     },
     fontSizes: {
+      small: "1rem",
       body: "1.2rem",
       heading: "1.3rem",
     },

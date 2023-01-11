@@ -1,31 +1,48 @@
 import { styled } from "../stitches.config";
 
-export const Container = styled("div", {
-  width: "100vw",
-  height: "100vh",
-  backgroundColor: "$background",
-});
-
 export const Wrapper = styled("div", {
   width: "100%",
-
+  maxWidth: "100rem",
   margin: "0 auto",
+
+  variants: {
+    layout: {
+      portrait: {
+        display: "flex",
+        flexDirection: "column",
+      },
+      landscape: {
+        display: "grid",
+        gridTemplateColumns: "repeat(6, 1fr)",
+        gridTemplateRows: "4em auto 4em auto",
+        gridTemplateAreas: `"afc-heading afc-heading afc-heading nfc-heading nfc-heading nfc-heading" "afc-wildcard afc-div afc-conf nfc-conf nfc-div nfc-wildcard" "sb-heading sb-heading sb-heading sb-heading sb-heading sb-heading" "sb sb sb sb sb sb"`,
+      },
+    },
+  },
 });
 
 export const Section = styled("div", {
   boxSizing: "border-box",
-  padding: "$matchup",
 
   display: "flex",
   flexDirection: "column",
-  width: "22rem",
+  width: "100%",
 
-  "@mobile": {
-    width: "auto",
-  },
+  variants: {
+    layout: {
+      portrait: {
+        width: "auto",
+        padding: "$matchup",
 
-  "& + div": {
-    borderTop: "1px solid $border100",
+        "& + div": {
+          borderTop: "1px solid $border100",
+        },
+      },
+      landscape: {
+        padding: "$round",
+        justifyContent: "center",
+      },
+    },
   },
 });
 
@@ -37,6 +54,10 @@ export const SectionHeading = styled("div", {
   marginBottom: "$matchup",
 
   color: "$font200",
-  fontSize: "$body",
+  fontSize: "$small",
   fontWeight: "$bold",
+
+  "@mobile": {
+    fontSize: "$body",
+  },
 });

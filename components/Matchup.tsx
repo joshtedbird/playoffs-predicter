@@ -31,12 +31,13 @@ const TeamBox = styled("div", {
   alignItems: "center",
   justifyContent: "flex-start",
   fontSize: "$body",
+  userSelect: "none",
 
   "& + div": {
     borderTop: "1px solid $border100",
   },
 
-  transition: "all 0.3s",
+  transition: "background-color 0.3s, color 0.3s",
 
   variants: {
     selected: {
