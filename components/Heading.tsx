@@ -1,6 +1,6 @@
 import { styled } from "../stitches.config";
 
-const Container = styled("div", {
+export const Heading1 = styled("div", {
   width: "100%",
   padding: "1rem 0",
 
@@ -40,12 +40,12 @@ interface HeadingProps {
 
 export function Heading({ children, area, icon }: HeadingProps) {
   return (
-    <Container
+    <Heading1
       layout={{ "@initial": "landscape", "@mobile": "portrait" }}
       css={{ gridArea: area }}
     >
       <Icon src={icon} />
       {children}
-    </Container>
+    </Heading1>
   );
 }

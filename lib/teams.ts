@@ -1,4 +1,5 @@
 export type Conference = "afc" | "nfc";
+export type Round = "wild" | "div" | "conf" | "sb";
 
 export type Team = {
   seed: number;

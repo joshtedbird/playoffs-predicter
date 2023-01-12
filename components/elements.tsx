@@ -1,9 +1,17 @@
 import { styled } from "../stitches.config";
 
+export const Container = styled("div", {
+  width: "100vw",
+  minHeight: "100vh",
+
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+});
+
 export const Wrapper = styled("div", {
   width: "100%",
   maxWidth: "100rem",
-  margin: "0 auto",
 
   variants: {
     layout: {
@@ -12,6 +20,8 @@ export const Wrapper = styled("div", {
         flexDirection: "column",
       },
       landscape: {
+        marginBottom: "3rem",
+
         display: "grid",
         gridTemplateColumns: "repeat(6, 1fr)",
         gridTemplateRows: "4em auto 4em auto",
@@ -19,6 +29,11 @@ export const Wrapper = styled("div", {
       },
     },
   },
+});
+
+export const Body = styled("span", {
+  maxWidth: "60rem",
+  padding: "$matchup",
 });
 
 export const Section = styled("div", {
